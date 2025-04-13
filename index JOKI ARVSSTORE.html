@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arvsstore - Jasa Joki Blox Fruits</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --text-primary: #f3f4f6;
+            --text-secondary: #d1d5db;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --card-bg: #1f2937;
+            --border: #374151;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--bg-secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-title {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .service-list {
+            list-style-type: none;
+        }
+
+        .service-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-name {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .price {
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .add-to-cart {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .cta-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-info, .payment-methods {
+            margin-bottom: 1rem;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .payment-icon {
+            background-color: white;
+            color: var(--bg-secondary);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Cart Styles */
+        .cart-icon-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            background-color: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: var(--bg-secondary);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+        }
+
+        .cart-item-price {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .quantity-btn {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .remove-item {
+            background-color: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .cart-summary {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--success);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            opacity: 0.9;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-secondary);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+        }
+
+        .overlay.open {
+            display: block;
+        }
+
+        /* Payment Method Styles */
+        .payment-method-section {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-method-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .payment-option {
+            position: relative;
+        }
+
+        .payment-option input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .payment-option label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-option input:checked + label {
+            border-color: var(--accent);
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .payment-logo {
+            background-color: white;
+            color: var(--bg-secondary);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card {
+                margin-bottom: 1rem;
+            }
+
+            .cart-sidebar {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="cart-icon-container" id="cartIcon">
+        <div class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+    </div>
+    
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Keranjang Belanja</h2>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be added here dynamically -->
+            <div class="empty-cart-message" id="emptyCartMessage">
+                Keranjang belanja Anda kosong.
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0K</span>
+            </div>
+            
+            <!-- Payment Method Selection -->
+            <div class="payment-method-section">
+                <div class="payment-method-title">Pilih Metode Pembayaran:</div>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" id="qris" name="payment" value="QRIS" checked>
+                        <label for="qris">
+                            <span class="payment-logo">QRIS</span>
+                            <span>QR Code</span>
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="dana" name="payment" value="DANA">
+                        <label for="dana">
+                            <span class="payment-logo">DANA</span>
+                            <span>E-Wallet</span>
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="ovo" name="payment" value="OVO">
+                        <label for="ovo">
+                            <span class="payment-logo">OVO</span>
+                            <span>E-Wallet</span>
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="gopay" name="payment" value="GoPay">
+                        <label for="gopay">
+                            <span class="payment-logo">GoPay</span>
+                            <span>E-Wallet</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="checkout-btn" id="checkoutBtn">Pesan via WhatsApp</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>ARVSSTORE JOKI</h1>
+                <p class="subtitle">Jasa Joki Blox Fruits Terpercaya</p>
+                <p>Tingkatkan level, dapatkan item langka, dan nikmati gameplay tanpa grinding!</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="services-grid">
+                <!-- Joki Sea Level -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Sea Level</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">100 Level First Sea</span>
+                            <span class="price">2K</span>
+                            <button class="add-to-cart" data-name="100 Level First Sea" data-price="2K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">100 Level Second Sea</span>
+                            <span class="price">4K</span>
+                            <button class="add-to-cart" data-name="100 Level Second Sea" data-price="4K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">100 Level Third Sea</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="100 Level Third Sea" data-price="5K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Belly -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Belly</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">1M Belly [Sea 1]</span>
+                            <span class="price">4K</span>
+                            <button class="add-to-cart" data-name="1M Belly [Sea 1]" data-price="4K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1M Belly [Sea 2 & 3]</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="1M Belly [Sea 2 & 3]" data-price="3K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Mastery Melee/Sword -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Mastery Melee/Sword</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">100 Mastery</span>
+                            <span class="price">2K</span>
+                            <button class="add-to-cart" data-name="100 Mastery Melee/Sword" data-price="2K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">200 Mastery</span>
+                            <span class="price">4K</span>
+                            <button class="add-to-cart" data-name="200 Mastery Melee/Sword" data-price="4K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">300 Mastery</span>
+                            <span class="price">6K</span>
+                            <button class="add-to-cart" data-name="300 Mastery Melee/Sword" data-price="6K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">350 Mastery</span>
+                            <span class="price">7K</span>
+                            <button class="add-to-cart" data-name="350 Mastery Melee/Sword" data-price="7K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Mastery Gun/Fruit -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Mastery Gun/Fruit</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">100 Mastery</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="100 Mastery Gun/Fruit" data-price="3K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">200 Mastery</span>
+                            <span class="price">6K</span>
+                            <button class="add-to-cart" data-name="200 Mastery Gun/Fruit" data-price="6K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">300 Mastery</span>
+                            <span class="price">9K</span>
+                            <button class="add-to-cart" data-name="300 Mastery Gun/Fruit" data-price="9K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">350 Mastery</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="350 Mastery Gun/Fruit" data-price="10K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Fragment -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Fragment</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">1K Fragment</span>
+                            <span class="price">1K</span>
+                            <button class="add-to-cart" data-name="1K Fragment" data-price="1K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Material -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Material</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">1K Bones</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="1K Bones" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">100 Ectoplasm</span>
+                            <span class="price">1K</span>
+                            <button class="add-to-cart" data-name="100 Ectoplasm" data-price="1K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">10 Conjured Cocoa</span>
+                            <span class="price">4K</span>
+                            <button class="add-to-cart" data-name="10 Conjured Cocoa" data-price="4K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1 Dragon Scale</span>
+                            <span class="price">2K</span>
+                            <button class="add-to-cart" data-name="1 Dragon Scale" data-price="2K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Dark Fragment</span>
+                            <span class="price">20K</span>
+                            <button class="add-to-cart" data-name="Dark Fragment" data-price="20K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Common Material [10]</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="Common Material [10]" data-price="3K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Uncommon Material [10]</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="Uncommon Material [10]" data-price="3K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Bounty -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Bounty</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">1M Bounty</span>
+                            <span class="price">30K</span>
+                            <button class="add-to-cart" data-name="1M Bounty" data-price="30K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">500K Bounty</span>
+                            <span class="price">25K</span>
+                            <button class="add-to-cart" data-name="500K Bounty" data-price="25K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">100K Bounty</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="100K Bounty" data-price="10K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Race -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Race</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">V1-V2</span>
+                            <span class="price">4K</span>
+                            <button class="add-to-cart" data-name="V1-V2" data-price="4K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">V2-V3 (Tergantung Race)</span>
+                            <span class="price">6K</span>
+                            <button class="add-to-cart" data-name="V2-V3 (Tergantung Race)" data-price="6K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Gear 0-1</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="Gear 0-1" data-price="10K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Gear 1-2</span>
+                            <span class="price">12K</span>
+                            <button class="add-to-cart" data-name="Gear 1-2" data-price="12K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Gear 2-3</span>
+                            <span class="price">15K</span>
+                            <button class="add-to-cart" data-name="Gear 2-3" data-price="15K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Gear 3-4</span>
+                            <span class="price">18K</span>
+                            <button class="add-to-cart" data-name="Gear 3-4" data-price="18K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Full Gear</span>
+                            <span class="price">48K</span>
+                            <button class="add-to-cart" data-name="Full Gear" data-price="48K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1x Train Session</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="1x Train Session" data-price="3K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Unlock Ghoul</span>
+                            <span class="price">15K</span>
+                            <button class="add-to-cart" data-name="Unlock Ghoul" data-price="15K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Unlock Cyborg</span>
+                            <span class="price">25K</span>
+                            <button class="add-to-cart" data-name="Unlock Cyborg" data-price="25K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki V4 -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki V4</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Kill Indra</span>
+                            <span class="price">20K</span>
+                            <button class="add-to-cart" data-name="Kill Indra" data-price="20K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Kill DK</span>
+                            <span class="price">20K</span>
+                            <button class="add-to-cart" data-name="Kill DK" data-price="20K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Pull Lever (Wajib Punya Mirror + Done Indra)</span>
+                            <span class="price">12K</span>
+                            <button class="add-to-cart" data-name="Pull Lever (Wajib Punya Mirror + Done Indra)" data-price="12K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Carry Raid -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Carry Raid</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">1x Normal Raid</span>
+                            <span class="price">1K</span>
+                            <button class="add-to-cart" data-name="1x Normal Raid" data-price="1K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Full Awaken</span>
+                            <span class="price">8K</span>
+                            <button class="add-to-cart" data-name="Full Awaken" data-price="8K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1x Advanced Raid</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="1x Advanced Raid" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Full Awaken Advanced</span>
+                            <span class="price">20K</span>
+                            <button class="add-to-cart" data-name="Full Awaken Advanced" data-price="20K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Fighting Style -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Fighting Style</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Superhuman</span>
+                            <span class="price">8K</span>
+                            <button class="add-to-cart" data-name="Superhuman" data-price="8K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Death Step</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="Death Step" data-price="10K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Dragon Talon</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="Dragon Talon" data-price="10K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Sharkman Karate</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="Sharkman Karate" data-price="10K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Electric Claw</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="Electric Claw" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Godhuman (All FS V1 & V2 Wajib 400 Mastery)</span>
+                            <span class="price">20K</span>
+                            <button class="add-to-cart" data-name="Godhuman (All FS V1 & V2 Wajib 400 Mastery)" data-price="20K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Get Gun -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Get Gun</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Soul Guitar (Ready Material)</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="Soul Guitar (Ready Material)" data-price="10K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Acidum Rifle</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="Acidum Rifle" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Kabucha</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="Kabucha" data-price="5K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Get Sword -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Get Sword</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Yama</span>
+                            <span class="price">20K</span>
+                            <button class="add-to-cart" data-name="Yama" data-price="20K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Tushita</span>
+                            <span class="price">25K</span>
+                            <button class="add-to-cart" data-name="Tushita" data-price="25K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Rengoku</span>
+                            <span class="price">8K</span>
+                            <button class="add-to-cart" data-name="Rengoku" data-price="8K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Saber</span>
+                            <span class="price">2K</span>
+                            <button class="add-to-cart" data-name="Saber" data-price="2K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Dark Blade V2</span>
+                            <span class="price">12K</span>
+                            <button class="add-to-cart" data-name="Dark Blade V2" data-price="12K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Dark Blade V3</span>
+                            <span class="price">90K</span>
+                            <button class="add-to-cart" data-name="Dark Blade V3" data-price="90K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Pole</span>
+                            <span class="price">7K</span>
+                            <button class="add-to-cart" data-name="Pole" data-price="7K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Pole V2</span>
+                            <span class="price">15K</span>
+                            <button class="add-to-cart" data-name="Pole V2" data-price="15K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Hallow Scythe</span>
+                            <span class="price">15K</span>
+                            <button class="add-to-cart" data-name="Hallow Scythe" data-price="15K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">CDK (Yama & Tushita Wajib 350 Mastery)</span>
+                            <span class="price">20K</span>
+                            <button class="add-to-cart" data-name="CDK (Yama & Tushita Wajib 350 Mastery)" data-price="20K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">TTK (Ready Bahan)</span>
+                            <span class="price">15K</span>
+                            <button class="add-to-cart" data-name="TTK (Ready Bahan)" data-price="15K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">TTK (Non Ready Bahan)</span>
+                            <span class="price">30K</span>
+                            <button class="add-to-cart" data-name="TTK (Non Ready Bahan)" data-price="30K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Legendary Sword (Request)</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="Legendary Sword (Request)" data-price="5K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Haki -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Haki</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Normal Color Haki (Request)</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="Normal Color Haki (Request)" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Legendary Color Haki (Request)</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="Legendary Color Haki (Request)" data-price="10K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1K Instinct</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="1K Instinct" data-price="10K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Quest -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Quest</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">5 Kill Elite Hunter</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="5 Kill Elite Hunter" data-price="3K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Bartilo Quest</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="Bartilo Quest" data-price="3K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Citizen</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="Citizen" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Don Swan</span>
+                            <span class="price">3K</span>
+                            <button class="add-to-cart" data-name="Don Swan" data-price="3K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1 Scroll Yama</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="1 Scroll Yama" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1 Scroll Tushita</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="1 Scroll Tushita" data-price="5K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Sea Event -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Sea Event</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Leviathan Heart</span>
+                            <span class="price">45K</span>
+                            <button class="add-to-cart" data-name="Leviathan Heart" data-price="45K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">2 Shark Tooth</span>
+                            <span class="price">1K</span>
+                            <button class="add-to-cart" data-name="2 Shark Tooth" data-price="1K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">10 Fools Gold</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="10 Fools Gold" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">2 Electric Wing</span>
+                            <span class="price">1K</span>
+                            <button class="add-to-cart" data-name="2 Electric Wing" data-price="1K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1 Mutant Tooth</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="1 Mutant Tooth" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">1 Terror Eye</span>
+                            <span class="price">12K</span>
+                            <button class="add-to-cart" data-name="1 Terror Eye" data-price="12K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">0–20 Leviathan Scale + Free Leviathan Heart</span>
+                            <span class="price">50K</span>
+                            <button class="add-to-cart" data-name="0–20 Leviathan Scale + Free Leviathan Heart" data-price="50K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Shark Anchor (Ready Magnet)</span>
+                            <span class="price">25K</span>
+                            <button class="add-to-cart" data-name="Shark Anchor (Ready Magnet)" data-price="25K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Terror Jaw</span>
+                            <span class="price">15K</span>
+                            <button class="add-to-cart" data-name="Terror Jaw" data-price="15K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Shark Tooth Necklace</span>
+                            <span class="price">5K</span>
+                            <button class="add-to-cart" data-name="Shark Tooth Necklace" data-price="5K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Monster Magnet</span>
+                            <span class="price">30K</span>
+                            <button class="add-to-cart" data-name="Monster Magnet" data-price="30K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Mirage Fruit Stock -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Mirage Fruit Stock</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">Buy Fruit (Money Wajib Ready)</span>
+                            <span class="price">10K</span>
+                            <button class="add-to-cart" data-name="Buy Fruit (Money Wajib Ready)" data-price="10K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Joki Kitsune Event -->
+                <div class="service-card">
+                    <h2 class="service-title">Joki Kitsune Event</h2>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <span class="service-name">25 Azure Ember (Bisa Request Gacha atau Tidak)</span>
+                            <span class="price">15K</span>
+                            <button class="add-to-cart" data-name="25 Azure Ember (Bisa Request Gacha atau Tidak)" data-price="15K">+ Keranjang</button>
+                        </li>
+                        <li class="service-item">
+                            <span class="service-name">Fox Lamp</span>
+                            <span class="price">60K</span>
+                            <button class="add-to-cart" data-name="Fox Lamp" data-price="60K">+ Keranjang</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cta-container">
+                <a href="#" class="cta-button" id="orderButton">Pesan via WhatsApp</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Hubungi Kami</h3>
+                    <p>WhatsApp: +62 812-3456-7890</p>
+                </div>
+                <div class="payment-methods">
+                    <h3>Metode Pembayaran</h3>
+                    <div class="payment-icons">
+                        <span class="payment-icon">QRIS</span>
+                        <span class="payment-icon">DANA</span>
+                        <span class="payment-icon">OVO</span>
+                        <span class="payment-icon">GoPay</span>
+                    </div>
+                </div>
+                <p class="copyright">© 2025 ARVSSTORE JOKI - Jasa Joki Blox Fruits Terpercaya</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const closeCart = document.getElementById('closeCart');
+        const overlay = document.getElementById('overlay');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const orderButton = document.getElementById('orderButton');
+
+        // Add to cart buttons
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const price = button.getAttribute('data-price');
+                addToCart(name, price);
+            });
+        });
+
+        // Open cart
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+            overlay.classList.add('open');
+        });
+
+        // Close cart
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        });
+
+        overlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.classList.remove('open');
+        });
+
+        // Add to cart function
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Show notification
+            const notification = document.createElement('div');
+            notification.textContent = `${name} ditambahkan ke keranjang!`;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'var(--success)';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '4px';
+            notification.style.zIndex = '1002';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 2000);
+        }
+
+        // Update cart display
+        function updateCart() {
+            // Update cart count
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartItems.appendChild(emptyCartMessage);
+            } else {
+                emptyCartMessage.style.display = 'none';
+                
+                // Add items to cart
+                cart.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    
+                    const cartItemInfo = document.createElement('div');
+                    cartItemInfo.className = 'cart-item-info';
+                    
+                    const cartItemName = document.createElement('div');
+                    cartItemName.className = 'cart-item-name';
+                    cartItemName.textContent = item.name;
+                    
+                    const cartItemPrice = document.createElement('div');
+                    cartItemPrice.className = 'cart-item-price';
+                    cartItemPrice.textContent = `${item.price} x ${item.quantity}`;
+                    
+                    cartItemInfo.appendChild(cartItemName);
+                    cartItemInfo.appendChild(cartItemPrice);
+                    
+                    const cartItemActions = document.createElement('div');
+                    cartItemActions.className = 'cart-item-actions';
+                    
+                    const cartItemQuantity = document.createElement('div');
+                    cartItemQuantity.className = 'cart-item-quantity';
+                    
+                    const decreaseBtn = document.createElement('button');
+                    decreaseBtn.className = 'quantity-btn';
+                    decreaseBtn.textContent = '-';
+                    decreaseBtn.addEventListener('click', () => {
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                        } else {
+                            cart.splice(index, 1);
+                        }
+                        updateCart();
+                    });
+                    
+                    const increaseBtn = document.createElement('button');
+                    increaseBtn.className = 'quantity-btn';
+                    increaseBtn.textContent = '+';
+                    increaseBtn.addEventListener('click', () => {
+                        item.quantity += 1;
+                        updateCart();
+                    });
+                    
+                    const quantityText = document.createElement('span');
+                    quantityText.textContent = item.quantity;
+                    
+                    cartItemQuantity.appendChild(decreaseBtn);
+                    cartItemQuantity.appendChild(quantityText);
+                    cartItemQuantity.appendChild(increaseBtn);
+                    
+                    const removeBtn = document.createElement('button');
+                    removeBtn.className = 'remove-item';
+                    removeBtn.textContent = 'Hapus';
+                    removeBtn.addEventListener('click', () => {
+                        cart.splice(index, 1);
+                        updateCart();
+                    });
+                    
+                    cartItemActions.appendChild(cartItemQuantity);
+                    cartItemActions.appendChild(removeBtn);
+                    
+                    cartItem.appendChild(cartItemInfo);
+                    cartItem.appendChild(cartItemActions);
+                    
+                    cartItems.appendChild(cartItem);
+                });
+            }
+            
+            // Update total
+            const total = cart.reduce((total, item) => {
+                const priceValue = parseInt(item.price.replace('K', ''));
+                return total + (priceValue * item.quantity);
+            }, 0);
+            
+            cartTotal.textContent = `${total}K`;
+        }
+
+        // Checkout function
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Keranjang belanja Anda kosong!');
+                return;
+            }
+            
+            // Get selected payment method
+            const selectedPayment = document.querySelector('input[name="payment"]:checked').value;
+            
+            let message = 'Halo ARVSSTORE JOKI, saya ingin memesan:%0A%0A';
+            
+            cart.forEach(item => {
+                message += `- ${item.name} (${item.price}) x${item.quantity}%0A`;
+            });
+            
+            const total = cart.reduce((total, item) => {
+                const priceValue = parseInt(item.price.replace('K', ''));
+                return total + (priceValue * item.quantity);
+            }, 0);
+            
+            message += `%0ATotal: ${total}K%0A`;
+            message += `Metode Pembayaran: ${selectedPayment}%0A%0ATerima kasih!`;
+            
+            window.open(`https://wa.me/+6281234567890?text=${message}`, '_blank');
+        }
+
+        // Checkout button
+        checkoutBtn.addEventListener('click', checkout);
+        orderButton.addEventListener('click', checkout);
+
+        // Initialize cart
+        updateCart();
+    </script>
+</body>
+</html>
